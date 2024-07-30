@@ -1,18 +1,43 @@
-import React from "react"
+'use client'
+import { title } from "process";
+import React, { useRef } from "react"
+
+const postBlog=async(title:string|undefined,description:string|undefined)=>{
+    
+ const res = await fetch(`http://localhost:3020/api/blog`,{
+    method:"POST",
+    headers:{
+        "Content-type":"application/json"
+    },
+    body:JSON.stringify({title,description}),
+ })
+ return res.json
+}
+
+
 
 const PostBlog=()=>{
+
+    const titleref=useRef<HTMLInputElement|null>(null);
+    const descriptionref=useRef<HTMLTextAreaElement|null>(null);
+    const handleSubmit=async(e:React.FormEvent)=>{
+        e.preventDefault();
+        await postBlog(titleref.current?.value,descriptionref.current?.value)
+    }
     return (
     <>
     <div className="w-full m-auto flex my-4">
       <div className="flex flex-col justify-center items-center m-auto">
         <p className="text-2xl text-slate-200 font-bold p-3">ブログ新規作成 🚀</p>
-        <form>
+        <form onSubmit={handleSubmit}>
           <input
+           ref={titleref}
             placeholder="タイトルを入力"
             type="text"
             className="rounded-md px-4 w-full py-2 my-2"
           />
           <textarea
+            ref={descriptionref}
             placeholder="記事詳細を入力"
             className="rounded-md px-4 py-2 w-full my-2"
           ></textarea>
@@ -23,6 +48,6 @@ const PostBlog=()=>{
       </div>
     </div>
   </>)
-}
 
+}
 export default PostBlog
