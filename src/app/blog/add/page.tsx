@@ -28,7 +28,7 @@ const PostBlog=()=>{
         await postBlog(titleref.current?.value,descriptionref.current?.value)
 
         router.push("/")
-        router.refresh
+        router.refresh()
     }
     return (
     <>
