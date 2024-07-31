@@ -1,4 +1,5 @@
 'use client'
+import { useRouter } from "next/navigation";
 import { title } from "process";
 import React, { useRef } from "react"
 
@@ -18,11 +19,16 @@ const postBlog=async(title:string|undefined,description:string|undefined)=>{
 
 const PostBlog=()=>{
 
+    const router=useRouter()
+
     const titleref=useRef<HTMLInputElement|null>(null);
     const descriptionref=useRef<HTMLTextAreaElement|null>(null);
     const handleSubmit=async(e:React.FormEvent)=>{
         e.preventDefault();
         await postBlog(titleref.current?.value,descriptionref.current?.value)
+
+        router.push("/")
+        router.refresh
     }
     return (
     <>
