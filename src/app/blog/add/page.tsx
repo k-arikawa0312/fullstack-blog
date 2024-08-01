@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { title } from "process";
 import React, { useRef } from "react"
-import toast, { Toaster } from "react-hot-toast";
+import  {toast, Toaster } from "react-hot-toast";
 
 const postBlog=async(title:string|undefined,description:string|undefined)=>{
     
