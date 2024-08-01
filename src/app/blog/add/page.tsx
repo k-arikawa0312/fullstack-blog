@@ -1,6 +1,5 @@
 'use client'
 import { useRouter } from "next/navigation";
-import { title } from "process";
 import React, { useRef } from "react"
 import  {toast, Toaster } from "react-hot-toast";
 
@@ -28,6 +27,7 @@ const PostBlog=()=>{
         e.preventDefault();
         toast.loading('投稿中です',{id:"1"})
         await postBlog(titleref.current?.value,descriptionref.current?.value)
+        toast.success("投稿完了",{id:"1"})
         router.push("/")
         router.refresh()
     }
