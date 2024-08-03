@@ -11,14 +11,19 @@ type UpdateBlogParams = {
 };
 
 const updateBlog = async (data: UpdateBlogParams) => {
+    try{
   const res = fetch(`http://localhost:3020/api/blog/${data.id}`, {
     method: "PUT",
     body: JSON.stringify({ title: data.title, description: data.description }),
     headers: {
       "Content-Type": "application/json",
     },
-  });
-  return (await res).json();
+});
+return (await res).json();
+}
+  catch(error){
+    console.log(error)
+  }
 };
 
 const getBlogById = async (id: number) => {
