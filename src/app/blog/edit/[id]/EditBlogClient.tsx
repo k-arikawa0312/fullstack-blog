@@ -20,7 +20,7 @@ const updateBlog = async (data: UpdateBlogParams) => {
       }),
       headers: {
         "Content-Type": "application/json",
-      }),
+      },
     });
     return await res.json();
   } catch (error) {
@@ -28,14 +28,21 @@ const updateBlog = async (data: UpdateBlogParams) => {
   }
 };
 
-const EditBlogClient = ({ id, initialData }: { id: string, initialData: { title: string, description: string } }) => {
+const EditBlogClient = ({
+  id,
+  initialData,
+}: {
+  id: string;
+  initialData: { title: string; description: string };
+}) => {
   const titleRef = useRef<HTMLInputElement | null>(null);
   const descriptionRef = useRef<HTMLTextAreaElement | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     if (titleRef.current) titleRef.current.value = initialData.title;
-    if (descriptionRef.current) descriptionRef.current.value = initialData.description;
+    if (descriptionRef.current)
+      descriptionRef.current.value = initialData.description;
   }, [initialData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
