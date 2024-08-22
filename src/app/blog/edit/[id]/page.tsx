@@ -88,7 +88,7 @@ const EditBlog = ({ params }: { params: { id: string } }) => {
         console.log(err);
         toast.error("Error Fetching Blog", { id: "1" });
       });
-  }, []);
+  }, [params.id]);
 
   return (
     <>
