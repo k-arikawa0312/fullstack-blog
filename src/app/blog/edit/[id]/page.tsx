@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import router from "next/router";
 import React, { Fragment, useEffect, useRef } from "react";
 import { Toaster, toast } from "react-hot-toast";
 
@@ -11,18 +12,20 @@ type UpdateBlogParams = {
 };
 
 const updateBlog = async (data: UpdateBlogParams) => {
-    try{
-  const res = fetch(`http://localhost:3020/api/blog/${data.id}`, {
-    method: "PUT",
-    body: JSON.stringify({ title: data.title, description: data.description }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-});
-return (await res).json();
-}
-  catch(error){
-    console.log(error)
+  try {
+    const res = fetch(`http://localhost:3020/api/blog/${data.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        title: data.title,
+        description: data.description,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return (await res).json();
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -43,9 +46,9 @@ const deleteBlog = async (id: number) => {
 };
 
 const EditBlog = ({ params }: { params: { id: string } }) => {
-  const router = useRouter();
   const titleRef = useRef<HTMLInputElement | null>(null);
   const descriptionRef = useRef<HTMLTextAreaElement | null>(null);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
