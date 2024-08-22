@@ -21,8 +21,14 @@ export default async function handler(
     });
     const updatedBlog = await response.json();
     res.status(200).json(updatedBlog);
+  } else if (req.method === "DELETE") {
+    const response = await fetch(`http://localhost:3020/api/blog/${id}`, {
+      method: "DELETE",
+    });
+    const deletedBlog = await response.json();
+    res.status(200).json(deletedBlog);
   } else {
-    res.setHeader("Allow", ["GET", "PUT"]);
+    res.setHeader("Allow", ["GET", "PUT", "DELETE"]);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
