@@ -125,5 +125,13 @@ const EditBlog = ({ params }: { params: { id: string } }) => {
     </>
   );
 };
+export async function generateStaticParams() {
+  const res = await fetch("http://localhost:3020/api/blog");
+  const blogs = await res.json();
+
+  return blogs.map((blog: { id: string }) => ({
+    params: { id: blog.id },
+  }));
+}
 
 export default EditBlog;
